@@ -18,3 +18,9 @@ function generateLink(os, versoes) {
 			&merge_request%5Btarget_project_id%5D=838`, '_blank');
 	}
 }
+
+function abrirGit() {
+	let os = $('#os').val();
+    let version = $('#version').val();
+	window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version}`, '_blank');
+}
