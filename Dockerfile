@@ -11,4 +11,4 @@ COPY . .
  
 CMD [ "node", "server.js" ]
 
-EXPOSE 7030:7030
+EXPOSE 7030
