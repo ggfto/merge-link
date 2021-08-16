@@ -22,5 +22,7 @@ function generateLink(os, versoes) {
 function abrirGit() {
 	let os = $('#os').val();
     let version = $('#version').val();
+    if(version != undefined) version = version.trim();
+    if(version == 'master') version = 'trunk';
 	window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version}`, '_blank');
 }
