@@ -13,8 +13,8 @@ function gerarLinks() {
 function generateLink(os, versoes) {
     let arrVersoes = versoes.split(',');
 	for(let i=0;i<arrVersoes.length;i++) {
-		window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/merge_requests/new?merge_request%5Bsource_branch%5D=${os}-${((arrVersoes[i] == 'master') ? 'trunk' : arrVersoes[i]).replace("-RC","").replace("-DEV","").replace(" ", "")}
-			&merge_request%5Bsource_project_id%5D=838&merge_request%5Btarget_branch%5D=${arrVersoes[i]}
+		window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/merge_requests/new?merge_request%5Bsource_branch%5D=${os}-${((arrVersoes[i] == 'master') ? 'trunk' : arrVersoes[i]).replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "")}
+			&merge_request%5Bsource_project_id%5D=838&merge_request%5Btarget_branch%5D=${arrVersoes[i].toUppercase()}
 			&merge_request%5Btarget_project_id%5D=838`, '_blank');
 	}
 }
@@ -24,5 +24,5 @@ function abrirGit() {
     let version = $('#version').val();
     if(version != undefined) version = version.trim();
     if(version == 'master') version = 'trunk';
-	window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version}`, '_blank');
+	window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version.toUppercase()}`, '_blank');
 }
