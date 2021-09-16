@@ -1,4 +1,34 @@
+html {
+    background-color: #EDC9FF;
+    overflow: hidden;
+}
+
 .form-data {
     margin: auto;
-    width: 50%;
+    width: 48%;
+    border-radius: 20px;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.padding-2 {
+    padding: 2%;
+}
+
+.main-bg {
+    background-color: #EDC9FF;
+}
+
+.man {
+    background-color: #7C7287;
+}
+
+.gtm {
+    background-color: #70AE6E;
 }
