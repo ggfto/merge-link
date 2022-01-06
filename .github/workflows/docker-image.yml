@@ -39,10 +39,8 @@ jobs:
         distro: bullseye
 
         run: |
-          apt update && \
-          apt install wget -y && \
-          wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/arm64/docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb && \
-          dpkg -i docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb && \
+          curl -fsSL https://get.docker.com -o get-docker.sh && \
+          DRY_RUN=1 sh ./get-docker.sh && \
           service restart docker && \
           docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
 
