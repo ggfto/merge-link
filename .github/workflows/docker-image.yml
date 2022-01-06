@@ -38,7 +38,7 @@ jobs:
         arch: armv7
         distro: bullseye
         run: | 
-          sudo apt install docker && docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
+          apt install docker && docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
 
     - name: Get the output
       run: |
