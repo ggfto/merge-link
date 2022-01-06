@@ -39,10 +39,10 @@ jobs:
         distro: bullseye
 
         run: |
-          apt update && apt install -y curl && \
+          apt update && apt install curl && \
           curl -fsSL https://get.docker.com -o get-docker.sh && \
           DRY_RUN=1 sh ./get-docker.sh && \
-          service restart docker && \
+          service docker restart && \
           docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
 
     - name: Get the output
