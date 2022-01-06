@@ -1,3 +1,5 @@
+[![Docker Image CI](https://github.com/ggfto/merge-link/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ggfto/merge-link/actions/workflows/docker-image.yml)
+
 # About
 ## English
 Node App to generate merge links to Sankhya's GitLab. It only works with Sankhya's structure.
