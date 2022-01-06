@@ -37,16 +37,11 @@ jobs:
       with:
         arch: aarch64
         distro: bullseye
-        download: |
-          wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/arm64/docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb
-        
-        install: |
-          dpkg -i docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb
-        
-        service-start: |
-          service restart docker
 
         run: |
+          wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/arm64/docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb && \
+          dpkg -i docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb && \
+          service restart docker && \
           docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
 
     - name: Get the output
