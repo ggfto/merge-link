@@ -39,6 +39,8 @@ jobs:
         distro: bullseye
 
         run: |
+          apt update && \
+          apt install wget -y && \
           wget https://download.docker.com/linux/debian/dists/bullseye/pool/stable/arm64/docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb && \
           dpkg -i docker-ce_20.10.9~3-0~debian-bullseye_arm64.deb && \
           service restart docker && \
