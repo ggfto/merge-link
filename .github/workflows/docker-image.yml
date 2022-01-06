@@ -33,13 +33,25 @@ jobs:
     - uses: actions/checkout@v2.1.0
     - uses: uraimo/run-on-arch-action@v2.1.1
       name: ARM builder
-      id: runcmd
+      id: build
       with:
         arch: armv7
         distro: bullseye
-        run: | 
-          apt install docker && docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
+        dependencies: |
+          apt update && apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
+        
+        add-repo: |
+          curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+        cfg-repo: |
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        
+        install: |
+          apt update && apt -y install docker-ce docker-ce-cli containerd.io
+        
+        run: |
+          docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
 
     - name: Get the output
       run: |
-        echo "${{ steps.runcmd.outputs }}"
+        echo "${{ steps.build.outputs }}"
