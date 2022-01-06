@@ -25,3 +25,9 @@ jobs:
     
     - name: Docker Push
       run: docker push ${{secrets.DOCKER_USER}}/merge-link
+
+    - name: ARM builder
+      uses: uraimo/run-on-arch-action@v2.1.1
+      arch: armv7
+      distro: bullseye
+      run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
