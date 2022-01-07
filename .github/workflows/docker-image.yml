@@ -27,23 +27,18 @@ jobs:
       run: docker push ${{secrets.DOCKER_USER}}/merge-link
   
   arm-build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2.1.0
-    - uses: uraimo/run-on-arch-action@v2.1.1
-      name: ARM builder
-      id: build
-      with:
-        arch: aarch64
-        distro: ubuntu20.04
-
-        run: |
-          apt update && apt install -y curl && \
-          curl -fsSL https://get.docker.com -o get-docker.sh && \
-          sh ./get-docker.sh && \
-          docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
-
-    - name: Get the output
+    - uses: actions/checkout@v2
+    - name: Docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
-        echo "${{ steps.build.outputs }}"
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build Docker image
+      run: docker build . --platform linux/arm64 --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest
+    
+    - name: Docker push
+      run: docker push ${{secrets.DOCKER_USER}}/merge-link
