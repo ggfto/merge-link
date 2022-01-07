@@ -36,12 +36,11 @@ jobs:
       id: build
       with:
         arch: aarch64
-        distro: bullseye
+        distro: ubuntu20.04
 
         run: |
-          apt update && apt install -y curl && \
           curl -fsSL https://get.docker.com -o get-docker.sh && \
-          DRY_RUN=1 sh ./get-docker.sh && \
+          sh ./get-docker.sh && \
           docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}} && docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest && docker push ${{secrets.DOCKER_USER}}/merge-link-arm
 
     - name: Get the output
