@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
         <link rel="stylesheet" href="style.css">
         <title>Merge Link Generator</title>
     </head>
@@ -20,7 +20,6 @@
         </section>
         <div class="width-100 display-flex">
             <section class="form-data man padding-2">
-                <h2 class="label">Manutenção</h2>
                 <div class="field">
                     <label class="label">OS da Branch de Origem:</label>
                     <div class="control">
@@ -30,42 +29,52 @@
                 <div class="field">
                     <label class="label">Versões para abrir Merge Request:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="4.7,4.8" id="versoes" required>
+                        <input class="input" type="text" placeholder="4.7,4.8" id="versoes" onchange="versionChange()" required>
                     </div>
                 </div>
-                <div class="control">
-                    <button class="button is-link" onclick="gerarLinks()">Gerar</button>
-                </div>
-            </section>
-            <section class="form-data gtm padding-2">
-                <h2 class="label">RM/GTM</h2>
-                <div class="field">
-                    <label class="label">OS da Branch de Origem:</label>
+                <div class="field is-grouped">
+                    <label class="label margin-right-10">Tags:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="1234567" id="os-gtm" required>
+                        <label class="checkbox">
+                            <input type="checkbox" id="dev">
+                            DEV
+                        </label>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label">Versão de desenvolvimento:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="4.7,4.8" id="versoes-gtm" required>
+                        <label class="checkbox">
+                            <input type="checkbox" id="rc">
+                            RC
+                        </label>
                     </div>
-                </div>
-                <div class="control">
-                    <button class="button is-link" onclick="gerarLinksGTM()">Gerar</button>
-                </div>
-            </section>
-        </div>
-        <div class="width-100 display-flex">
-            <section class="form-data padding-2">
-                <div class="field">
-                    <label class="label"></br>Versão da branch:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="4.8" id="version" required>
+                        <label class="checkbox">
+                            <input type="checkbox" id="homolog">
+                            HOMOLOG
+                        </label>
+                    </div><div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" id="fechada">
+                            FECHADA
+                        </label>
                     </div>
                 </div>
-                <div class="control">
-                    <button class="button is-link" onclick="abrirGit()">Abrir Git</button>
+                <div class="field is-grouped">
+                    <label class="label margin-right-10">Opções:</label>
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" id="gtm">
+                            RM/GTM
+                        </label>
+                    </div>
+                </div>
+                <div class="field is-grouped-centered">
+                    <button class="button is-warning margin-right-10" onclick="gerarLinks()">Gerar</button>
+                    <div class="select margin-right-10">
+                        <select id="selGitVersion">
+                        <option>Selecione</option>
+                        </select>
+                    </div>
+                    <buton class="button is-success margin-right-10" onclick="abrirGit()">Abrir Git</buton>
                     <button class="button is-link" onclick="abrirBranch()">Abrir Pipeline de Branch</button>
                 </div>
             </section>

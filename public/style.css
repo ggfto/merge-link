@@ -1,5 +1,5 @@
 html {
-    background-color: #EDC9FF;
+    background-color: #00FFFF;
     overflow: hidden;
 }
 
@@ -22,13 +22,14 @@ html {
 }
 
 .main-bg {
-    background-color: #EDC9FF;
+    background-color: #00FFFF;
 }
 
-.man {
+.form-data {
     background-color: #7C7287;
+    color: white;
 }
 
-.gtm {
-    background-color: #70AE6E;
+.margin-right-10 {
+    margin-right: 10px;
 }
