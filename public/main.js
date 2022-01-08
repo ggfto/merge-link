@@ -32,6 +32,9 @@ function versionChange() {
 	addOption(selName, "Selecione", undefined);
 	for(let i=0;i<arrVersoes.length;i++) {
 		addOption(selName, arrVersoes[i], arrVersoes[i]);
+		if($('#dev').is(":checked")) addOption(selName, arrVersoes[i] + "-DEV", arrVersoes[i] + "-DEV");
+		if($('#rc').is(":checked")) addOption(selName, arrVersoes[i] + "-RC", arrVersoes[i] + "-RC");
+		if($('#homolog').is(":checked")) addOption(selName, arrVersoes[i] + "-HOMOLOG", arrVersoes[i] + "-HOMOLOG");
 	}
 }
 

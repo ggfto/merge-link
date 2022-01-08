@@ -1,5 +1,5 @@
 html {
-    background-color: #00FFFF;
+    background-color: #000;
     overflow: hidden;
 }
 
@@ -22,7 +22,7 @@ html {
 }
 
 .main-bg {
-    background-color: #00FFFF;
+    background-color: #000;
 }
 
 .form-data {
