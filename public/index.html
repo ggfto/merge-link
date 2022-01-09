@@ -7,6 +7,10 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
         <link rel="stylesheet" href="style.css">
+        <!-- Sweert Alert START -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark/dark.css">
+        <!-- Sweert Alert END -->
         <title>Merge Link Generator</title>
     </head>
     <body class="main-bg">
@@ -27,7 +31,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Versões para abrir Merge Request:</label>
+                    <label class="label">Versões de Trabalho:</label>
                     <div class="control">
                         <input class="input" type="text" placeholder="4.7,4.8" id="versoes" onblur="versionChange()" required>
                     </div>
@@ -81,7 +85,7 @@
                     </div>
                 </div>
                 <div class="field is-grouped-centered">
-                    <button class="button is-warning margin-right-10" onclick="gerarLinks()" disabled id="gerar">Gerar</button>
+                    <button class="button is-warning margin-right-10" onclick="gerarLinks()" id="gerar">Gerar MR(s)</button>
                     <div class="select margin-right-10">
                         <select id="selGitVersion" onchange="selChange()">
                         <option>Selecione</option>
