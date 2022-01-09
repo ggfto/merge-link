@@ -33,22 +33,35 @@
                     </div>
                 </div>
                 <div class="field is-grouped">
+                    <label class="label margin-right-10">Prioridade:</label>
+                    <div class="control">
+                        <label class="radio">
+                          <input type="radio" name="prioridade" id="p1" onclick="setPriority('p1')">
+                          P1
+                        </label>
+                        <label class="radio">
+                          <input type="radio" name="prioridade" id="p2" onclick="setPriority('p2')">
+                          P2/P3
+                        </label>
+                      </div>
+                </div>
+                <div class="field is-grouped">
                     <label class="label margin-right-10">Tags:</label>
                     <div class="control">
                         <label class="checkbox">
-                            <input type="checkbox" id="dev">
+                            <input type="checkbox" onchange="versionChange()" id="dev">
                             DEV
                         </label>
                     </div>
                     <div class="control">
                         <label class="checkbox">
-                            <input type="checkbox" id="rc">
+                            <input type="checkbox" onchange="versionChange()" id="rc">
                             RC
                         </label>
                     </div>
                     <div class="control">
                         <label class="checkbox">
-                            <input type="checkbox" id="homolog">
+                            <input type="checkbox" onchange="versionChange()" id="homolog">
                             HOMOLOG
                         </label>
                     </div><div class="control">
@@ -68,13 +81,13 @@
                     </div>
                 </div>
                 <div class="field is-grouped-centered">
-                    <button class="button is-warning margin-right-10" onclick="gerarLinks()">Gerar</button>
+                    <button class="button is-warning margin-right-10" onclick="gerarLinks()" disabled id="gerar">Gerar</button>
                     <div class="select margin-right-10">
-                        <select id="selGitVersion">
+                        <select id="selGitVersion" onchange="selChange()">
                         <option>Selecione</option>
                         </select>
                     </div>
-                    <buton class="button is-success margin-right-10" onclick="abrirGit()">Abrir Git</buton>
+                    <buton class="button is-success margin-right-10" onclick="abrirGit()" disabled id="git">Abrir Git</buton>
                     <button class="button is-link" onclick="abrirBranch()">Abrir Pipeline de Branch</button>
                 </div>
             </section>

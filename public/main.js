@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	$('#p2').click();
+});
+
 function gerarLinks() {
     let arg1 = $('#os').val();
     let arg2 = $('#versoes').val();
@@ -13,14 +17,19 @@ function gerarLinksGTM() {
 function generateLink(os, versoes) {
     let arrVersoes = versoes.split(',');
 	for(let i=0;i<arrVersoes.length;i++) {
-		let originBranch = arrVersoes[i].replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "");
-		let destinationBranch = arrVersoes[i].toUpperCase().replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "");
-		if($('#gtm').is(":checked")) originBranch += "-DEV";
-		if($('#gtm').is(":checked")) destinationBranch += "-DEV";
+		let branch = arrVersoes[i].replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "");
+		if($('#gtm').is(":checked")) {
+			branch += "-DEV";
 
-		window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/merge_requests/new?merge_request%5Bsource_branch%5D=${os}-${originBranch}
+		if($('#dev'))
+
+		console.log(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/merge_requests/new?merge_request%5Bsource_branch%5D=${os}-${branch}
+		&merge_request%5Bsource_project_id%5D=838&merge_request%5Btarget_branch%5D=${branch}
+		&merge_request%5Btarget_project_id%5D=838`);
+
+		/*window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/merge_requests/new?merge_request%5Bsource_branch%5D=${os}-${originBranch}
 			&merge_request%5Bsource_project_id%5D=838&merge_request%5Btarget_branch%5D=${destinationBranch}
-			&merge_request%5Btarget_project_id%5D=838`, '_blank');
+			&merge_request%5Btarget_project_id%5D=838`, '_blank');*/
 	}
 }
 
@@ -44,13 +53,35 @@ function addOption(select, optText, optVal) {
 	$(`#${select}`).append(o);
 }
 
+function setPriority(priority) {
+	$('#dev').prop('checked', true);
+	$('#rc').prop('checked', false);
+	$('#homolog').prop('checked', false);
+	$('#fechada').prop('checked', false);
+	if('p1' === priority) {
+		$('#dev').prop('checked', true);
+		$('#rc').prop('checked', true);
+		$('#homolog').prop('checked', false);
+		$('#fechada').prop('checked', true);
+	}
+	versionChange();
+}
+
+function selChange() {
+	let version = $('#selGitVersion').find(":selected").text();
+	$('#git').attr('disabled', true);
+	if(version != undefined && version != "Selecione") $('#git').removeAttr('disabled');
+}
+
 function abrirGit() {
 	let os = $('#os').val();
 	let selName = "selGitVersion";
     let version = $(`#${selName}`).find(":selected").text();
-    if(version != undefined) version = version.trim();
-    if(version == 'master') version = 'trunk';
-	window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version.toUpperCase()}`, '_blank');
+	if(version != undefined && version != "Selecione") {
+		version = version.trim();
+		if(version == 'master') version = 'trunk';
+		window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version.toUpperCase()}`, '_blank');
+	}
 }
 
 function abrirBranch() {
