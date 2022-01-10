@@ -24,8 +24,8 @@ function generateLink(os, versoes) {
 		return;
 	}
 	for(let i=0;i<arrVersoes.length;i++) {
-		let branch = arrVersoes[i].replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "");
 		let link = "";
+		let branch = arrVersoes[i].replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "").trim();
 		if(isChecked('gtm')) {
 			link = linkGen(os, branch, "-DEV", "-DEV");
 			openWindow(teste, link);
@@ -93,6 +93,7 @@ function versionChange() {
 	addOption(selName, "Selecione", undefined);
 	for(let i=0;i<arrVersoes.length;i++) {
 		if(arrVersoes[i] == undefined || arrVersoes[i] == "") return;
+		arrVersoes[i] = arrVersoes[i].replace("-RC","").replace("-DEV","").replace("-HOMOLOG", "").replace(" ", "").trim();
 		addOption(selName, arrVersoes[i], arrVersoes[i]);
 		if($('#dev').is(":checked")) addOption(selName, arrVersoes[i] + "-DEV", arrVersoes[i] + "-DEV");
 		if($('#rc').is(":checked")) addOption(selName, arrVersoes[i] + "-RC", arrVersoes[i] + "-RC");
