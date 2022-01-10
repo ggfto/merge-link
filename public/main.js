@@ -1,4 +1,4 @@
-let teste = true;
+let teste = false;
 $(document).ready(function() {
 	$('#p2').click();
 });
