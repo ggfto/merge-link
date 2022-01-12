@@ -5,8 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
         <link rel="stylesheet" href="style.css">
+        <!-- Sweert Alert START -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark/dark.css">
+        <!-- Sweert Alert END -->
         <title>Merge Link Generator</title>
     </head>
     <body class="main-bg">
@@ -20,7 +24,6 @@
         </section>
         <div class="width-100 display-flex">
             <section class="form-data man padding-2">
-                <h2 class="label">Manutenção</h2>
                 <div class="field">
                     <label class="label">OS da Branch de Origem:</label>
                     <div class="control">
@@ -28,44 +31,67 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">Versões para abrir Merge Request:</label>
+                    <label class="label">Versões de Trabalho:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="4.7,4.8" id="versoes" required>
+                        <input class="input" type="text" placeholder="4.7,4.8" id="versoes" onblur="versionChange()" required>
                     </div>
                 </div>
-                <div class="control">
-                    <button class="button is-link" onclick="gerarLinks()">Gerar</button>
-                </div>
-            </section>
-            <section class="form-data gtm padding-2">
-                <h2 class="label">RM/GTM</h2>
-                <div class="field">
-                    <label class="label">OS da Branch de Origem:</label>
+                <div class="field is-grouped">
+                    <label class="label margin-right-10">Prioridade:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="1234567" id="os-gtm" required>
+                        <label class="radio">
+                          <input type="radio" name="prioridade" id="p1" onclick="setPriority('p1')">
+                          P1
+                        </label>
+                        <label class="radio">
+                          <input type="radio" name="prioridade" id="p2" onclick="setPriority('p2')">
+                          P2/P3
+                        </label>
+                      </div>
+                </div>
+                <div class="field is-grouped">
+                    <label class="label margin-right-10">Tags:</label>
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" onchange="versionChange()" id="dev">
+                            DEV
+                        </label>
+                    </div>
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" onchange="versionChange()" id="rc">
+                            RC
+                        </label>
+                    </div>
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" onchange="versionChange()" id="homolog">
+                            HOMOLOG
+                        </label>
+                    </div><div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" id="fechada">
+                            FECHADA
+                        </label>
                     </div>
                 </div>
-                <div class="field">
-                    <label class="label">Versão de desenvolvimento:</label>
+                <div class="field is-grouped">
+                    <label class="label margin-right-10">Opções:</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="4.7,4.8" id="versoes-gtm" required>
+                        <label class="checkbox">
+                            <input type="checkbox" id="gtm">
+                            RM/GTM (adiciona -DEV ao realizar os procedimentos)
+                        </label>
                     </div>
                 </div>
-                <div class="control">
-                    <button class="button is-link" onclick="gerarLinksGTM()">Gerar</button>
-                </div>
-            </section>
-        </div>
-        <div class="width-100 display-flex">
-            <section class="form-data padding-2">
-                <div class="field">
-                    <label class="label"></br>Versão da branch:</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="4.8" id="version" required>
+                <div class="field is-grouped-centered">
+                    <button class="button is-warning margin-right-10" onclick="gerarLinks()" id="gerar">Gerar MR(s)</button>
+                    <div class="select margin-right-10">
+                        <select id="selGitVersion" onchange="selChange()">
+                        <option>Selecione</option>
+                        </select>
                     </div>
-                </div>
-                <div class="control">
-                    <button class="button is-link" onclick="abrirGit()">Abrir Git</button>
+                    <buton class="button is-success margin-right-10" onclick="abrirGit()" disabled id="git">Abrir Git</buton>
                     <button class="button is-link" onclick="abrirBranch()">Abrir Pipeline de Branch</button>
                 </div>
             </section>
