@@ -1,0 +1,29 @@
+name: Docker ARM Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  arm-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: uraimo/run-on-arch-action@v2
+        name: arm-build
+        id: build
+        with:
+          arch: aarch64
+          distro: ubuntu18.04
+          env:
+            artifact_name: git-ubuntu18.04_aarch64
+            DOCKER_USER: ${{secrets.DOCKER_USER}}
+            DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+          shell: /bin/sh
+          install: apt-get update -q -y && apt-get install -q -y git;
+          run: |
+            sudo apt update && sudo apt upgrade -y && docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+          run: docker build --file Dockerfile --tag ${{DOCKER_USER}}/merge-link-arm:latest
+          run: docker push ${{DOCKER_USER}}/merge-link-arm
