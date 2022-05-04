@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: uraimo/run-on-arch-action@v2
-        name: arm-build
+        name: Setup and login
         id: build
         with:
           arch: aarch64
@@ -25,5 +25,7 @@ jobs:
           install: apt-get update -q -y && apt-get install -q -y git;
           run: |
             sudo apt update && sudo apt upgrade -y && docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build
           run: docker build --file Dockerfile --tag ${{DOCKER_USER}}/merge-link-arm:latest
+      - name: Push to hub
           run: docker push ${{DOCKER_USER}}/merge-link-arm
