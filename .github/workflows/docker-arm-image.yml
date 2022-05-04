@@ -26,6 +26,6 @@ jobs:
           run: |
             sudo apt update && sudo apt upgrade -y && docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: Build
-          run: docker build --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest
+          run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/merge-link-arm:latest
       - name: Push to hub
           run: docker push ${{secrets.DOCKER_USER}}/merge-link-arm
