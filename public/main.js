@@ -6,7 +6,7 @@ $(document).ready(function() {
 function gerarLinks() {
     let arg1 = $('#os').val();
     let arg2 = $('#versoes').val();
-    generateLink(arg1, arg2);
+    generateLink(arg1.replace(" ", "").trim(), arg2);
 }
 
 function generateLink(os, versoes) {
