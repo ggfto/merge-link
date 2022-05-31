@@ -129,6 +129,7 @@ function selChange() {
 
 function abrirGit() {
 	let os = $('#os').val();
+    os = os.replace(" ", "").trim()
 	let selName = "selGitVersion";
     let version = $(`#${selName}`).find(":selected").text();
 	if(version != undefined && version != "Selecione") {
@@ -136,6 +137,12 @@ function abrirGit() {
 		if(version == 'master') version = 'trunk';
 		window.open(`https://git.sankhya.com.br/plataforma-w/sankhyaw/-/tree/${os}-${version.toUpperCase()}`, '_blank');
 	}
+}
+
+function openMergeView() {
+    let os = $('#os').val();
+    os = os.replace(" ", "").trim();
+    windows.open(`https://git.sankhya.com.br/dashboard/merge_requests?scope=all&utf8=✓&state=opened&search=${os}`);
 }
 
 function abrirBranch() {
