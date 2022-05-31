@@ -142,7 +142,7 @@ function abrirGit() {
 function openMergeView() {
     let os = $('#os').val();
     os = os.replace(" ", "").trim();
-    windows.open(`https://git.sankhya.com.br/dashboard/merge_requests?scope=all&utf8=✓&state=opened&search=${os}`);
+    window.open(`https://git.sankhya.com.br/dashboard/merge_requests?scope=all&utf8=✓&state=opened&search=${os}`);
 }
 
 function abrirBranch() {
